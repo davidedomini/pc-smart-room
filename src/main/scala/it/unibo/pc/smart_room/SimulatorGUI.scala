@@ -1,5 +1,7 @@
 package it.unibo.pc.smart_room
 
+import it.unibo.pc.smart_room.centralized.BoardSimulator
+
 import javax.swing.{
   BoxLayout,
   JButton,
@@ -119,9 +121,9 @@ class SimulatorGUI(simulator: BoardSimulator) extends JFrame:
     self.setVisible(true)
   }
 
-class LightPanel(width: Int, height: Int) extends JPanel:
-  var isOn: Boolean = true
-  override def paint(g: Graphics): Unit =
-    if isOn then g.setColor(Color.YELLOW)
-    else g.setColor(Color.BLACK)
-    g.fillRect(20, 20, width - 20, height - 20)
+  class LightPanel(width: Int, height: Int) extends JPanel:
+    var isOn: Boolean = true
+    override def paint(g: Graphics): Unit =
+      if isOn then g.setColor(Color.YELLOW)
+      else g.setColor(Color.BLACK)
+      g.fillRect(20, 20, width - 20, height - 20)

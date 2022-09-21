@@ -1,4 +1,4 @@
-package it.unibo.pc.smart_room
+package it.unibo.pc.smart_room.centralized
 
 class Controller(simulator: BoardSimulator) extends Thread:
   override def run(): Unit =
