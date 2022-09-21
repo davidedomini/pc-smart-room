@@ -1,18 +1,23 @@
 package it.unibo.pc.smart_room
 
 class BoardSimulator extends LightDevice with LuminositySensorDevice with PresenceDetectionDevice:
+  self =>
+  private var _luminosity = 0.0
+  private var isPresenceDetected = false
+  private val gui = new SimulatorGUI(self)
+  gui.display
 
-  private val _luminosity = 0.0
-  private val isPresenceDetected = false
+  override def on: Unit = gui.setOn
 
-  override def on: Unit = ???
-
-  override def off: Unit = ???
+  override def off: Unit = gui.setOff
 
   override def luminosity: Double = _luminosity
 
   override def presenceDetected: Boolean = isPresenceDetected
 
-  def updateLuminosity(luminosity: Double): Unit = ???
+  def updateLuminosity(l: Double): Unit = _luminosity = l
 
-  def updatePresence(isPresent: Boolean): Unit = ???
+  def updatePresence(isPresent: Boolean): Unit = isPresenceDetected = isPresent
+
+object Launcher extends App:
+  new BoardSimulator
