@@ -19,7 +19,7 @@ import java.awt.{Color, FlowLayout, Graphics}
 class SimulatorGUI(simulator: BoardSimulator) extends JFrame:
   self =>
   private var lumValue: JTextField = null
-  private var lightPanel: JPanel = null
+  private var lightPanel: LightPanel = null
   private var lumSlider: JSlider = null
   private var currentLumValue: Int = 0
   private var enter: JButton = null
@@ -105,9 +105,15 @@ class SimulatorGUI(simulator: BoardSimulator) extends JFrame:
     currentLumValue = i
     simulator.updateLuminosity(i.toDouble / 100.0)
 
-  def setOn: Unit = isOn = true
+  def setOn: Unit =
+    lightPanel.isOn = true
+    lightPanel.invalidate()
+    lightPanel.repaint()
 
-  def setOff: Unit = isOn = false
+  def setOff: Unit =
+    lightPanel.isOn = false
+    lightPanel.invalidate()
+    lightPanel.repaint()
 
   def display: Unit = SwingUtilities.invokeLater { () =>
     self.setVisible(true)

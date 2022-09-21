@@ -18,6 +18,3 @@ class BoardSimulator extends LightDevice with LuminositySensorDevice with Presen
   def updateLuminosity(l: Double): Unit = _luminosity = l
 
   def updatePresence(isPresent: Boolean): Unit = isPresenceDetected = isPresent
-
-object Launcher extends App:
-  new BoardSimulator
