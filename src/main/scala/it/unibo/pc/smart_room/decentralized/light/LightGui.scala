@@ -45,14 +45,14 @@ class LightGui extends JFrame:
     lightPanel.repaint()
 
   class LightPanel(width: Int, height: Int) extends JPanel:
-    var isOn: Boolean = true
+    var isOn: Boolean = false
     override def paint(g: Graphics): Unit =
       if isOn then g.setColor(Color.YELLOW)
       else g.setColor(Color.BLACK)
       g.fillRect(20, 20, width - 20, height - 20)
 
 //Just a test
-object L extends App:
+object TestLighGui extends App:
   val lg = new LightGui()
   lg.display
   Thread.sleep(1000)
