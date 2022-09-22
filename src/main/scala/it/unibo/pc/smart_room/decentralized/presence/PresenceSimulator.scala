@@ -8,9 +8,13 @@ import io.netty.handler.codec.mqtt.MqttQoS
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.Vertx
 
-class PresenceGui extends JFrame:
+class PresenceSimulator extends JFrame:
+
+  //mqtt connection
   val client: MqttClient = MqttClient.create(Vertx.vertx)
   client.connect(1883, "broker.mqtt-dashboard.com", c => println("Connected..."))
+
+  //gui
   val presDetControlPanel: JPanel = new JPanel
   presDetControlPanel.setLayout(new BoxLayout(presDetControlPanel, BoxLayout.Y_AXIS))
   val presTitlePanel: JPanel = new JPanel
@@ -46,5 +50,5 @@ class PresenceGui extends JFrame:
   private def sendMsg(msg: String): Unit =
     client.publish("light", Buffer.buffer(msg), MqttQoS.AT_LEAST_ONCE, false, false);
 
-object TestPresenceGui extends App:
-  new PresenceGui().display
+object TestPresenceSimulator extends App:
+  new PresenceSimulator().display

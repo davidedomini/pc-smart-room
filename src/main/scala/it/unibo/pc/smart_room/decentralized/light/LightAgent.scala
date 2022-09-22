@@ -9,6 +9,8 @@ class LightAgent extends AbstractVerticle:
 
   val gui = LightGui()
   gui.display
+  var lastL = 0.0
+  var isPresent = false
 
   override def start(): Unit =
     val client: MqttClient = MqttClient.create(vertx)
@@ -19,15 +21,23 @@ class LightAgent extends AbstractVerticle:
         println("Connected...")
         client
           .publishHandler(s =>
-            //println(s"There is a new message in the topic ${s.topicName}")
-            //println(s"Content of the message: ${s.payload().toString()}")
-            //println(s"QoS: ${s.qosLevel}")
-            if s.payload().toString.equals("Enter") then gui.setOn
-            else if s.payload().toString.equals("Exit") then gui.setOff
+            s.payload().toString match {
+              case "Enter" =>
+                isPresent = true
+                gui.setOn
+              case "Exit" =>
+                isPresent = false
+                if lastL >= 0.2 then gui.setOff
+              case msg: String if msg.contains("Luminosity") =>
+                val l = msg.split(" ")(1).toDouble
+                lastL = l
+                if l < 0.2 then gui.setOn
+                else if isPresent then gui.setOn
+                else gui.setOff
+              case _ =>
+            }
           )
           .subscribe("light", 2)
-
-      //client.publish("light", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false);
     )
 
 object TestLighAgent extends App:
