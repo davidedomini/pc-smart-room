@@ -1,6 +1,6 @@
 package it.unibo.pc.smart_room.centralized
 
-import it.unibo.pc.smart_room.{SimulatorGUI, LightDevice, LuminositySensorDevice, PresenceDetectionDevice}
+import it.unibo.pc.smart_room.{LightDevice, LuminositySensorDevice, PresenceDetectionDevice}
 
 class BoardSimulator extends LightDevice with LuminositySensorDevice with PresenceDetectionDevice:
   self =>

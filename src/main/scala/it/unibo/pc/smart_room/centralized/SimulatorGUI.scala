@@ -1,22 +1,10 @@
-package it.unibo.pc.smart_room
+package it.unibo.pc.smart_room.centralized
 
 import it.unibo.pc.smart_room.centralized.BoardSimulator
 
-import javax.swing.{
-  BoxLayout,
-  JButton,
-  JFrame,
-  JLabel,
-  JPanel,
-  JSeparator,
-  JSlider,
-  JTextField,
-  SwingConstants,
-  SwingUtilities
-}
-import javax.swing.JSlider
-import javax.swing.event.ChangeEvent
 import java.awt.{Color, FlowLayout, Graphics}
+import javax.swing.event.ChangeEvent
+import javax.swing.*
 
 class SimulatorGUI(simulator: BoardSimulator) extends JFrame:
   self =>
